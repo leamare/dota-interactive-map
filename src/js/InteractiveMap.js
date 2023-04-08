@@ -58,6 +58,7 @@ class InteractiveMap {
             },
         };
         this.mapTilePath = mapTilePath;
+        console.log(this, this.mapTilePath);
         this.visionDataImagePath = visionDataImagePath;
         this.vs = new VisionSimulation(worlddata);
         this.mode = this.options.mode;
