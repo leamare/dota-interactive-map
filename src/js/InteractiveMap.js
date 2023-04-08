@@ -21,7 +21,7 @@ import mapConstants from './mapConstants';
 import styles from './styleDefinitions';
 import { loadGeoJSON, loadJSON, loadLayerGroupFromData } from './dataLoader';
 import { getScaledRadius, worldToLatLon } from './conversion';
-import baseLayerDefinitions from './baseLayerDefinitions';
+import baseLayerDefinitions from '../../baseLayerDefinitions';
 import layerDefinitions from './layerDefinitions';
 import modeNotificationText from './modeNotificationText';
 import MenuControl from './controls/menu';

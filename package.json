@@ -1,6 +1,6 @@
 {
   "name": "dota-interactive-map",
-  "version": "5.2.0",
+  "version": "5.2.1",
   "description": "Interactive Dota 2 Map",
   "main": "src/js/index.js",
   "private": true,
@@ -54,7 +54,7 @@
     "jinjs": "^0.3.6",
     "js-yaml": "^3.10.0",
     "marked": "^0.6.2",
-    "node-sass": "^4.6.0",
+    "node-sass": "^8.0.0",
     "nodemon": "^1.12.1",
     "npm-run-all": "^4.1.3",
     "preprocess": "^3.1.0",

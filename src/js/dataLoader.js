@@ -64,7 +64,8 @@ const loadJSON = (map, layerDef, data, layer) => {
     const features = data.data[layerDef.id].map((point) => {
         const unitClass = point.subType ? `${layerDef.id}_${point.subType}` : layerDef.id;
         const stats = data.stats[unitClass];
-        const bounds = layerDef.id == 'ent_dota_tree' ? [64, 64] : stats.bounds;
+        
+        const bounds = layerDef.id == 'ent_dota_tree' ? [64, 64] : (stats ? stats.bounds : data.data[unitClass][0].bounds);
         const geom = (bounds && bounds[0] > 0 && bounds[1] > 0)
             ? new Polygon([[
                 transform([point.x - bounds[0], point.y - bounds[1]], dotaProj, pixelProj),

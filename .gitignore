@@ -5,3 +5,5 @@ src/template/*.html
 .env*
 !.env.example
 scripts/generateGeoJson.js
+assets/tiles/
+baseLayerDefinitions.js
