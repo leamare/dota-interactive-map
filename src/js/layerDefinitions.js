@@ -73,6 +73,16 @@ const layerDefinitions = [
         style: (feature, resolution) => styles.neutralCamp[parseInt(feature.get('dotaProps').neutralType)],
     },
     {
+        id: 'landmark_aura',
+        name: 'Landmark Auras',
+        type: 'polygon',
+        group: 'overlay',
+        style: new Style({
+            fill: new Fill({ color: [0, 125, 255, 0.3] }),
+            stroke: new Stroke({ color: [0, 125, 255, 0.8] }),
+        }),
+    },
+    {
         id: 'ent_dota_tree',
         name: 'Trees',
         group: 'object',
@@ -86,6 +96,18 @@ const layerDefinitions = [
         style: styles.roshan,
     },
     {
+        id: 'landmarks',
+        name: 'Landmarks',
+        group: 'object',
+        style: styles.landmarks,
+    },
+    {
+        id: 'npc_dota_miniboss_spawner',
+        name: 'Tormentor',
+        group: 'object',
+        style: styles.sentinel,
+    },
+    {
         id: 'dota_item_rune_spawner_powerup',
         name: 'Runes',
         group: 'object',
@@ -96,6 +118,12 @@ const layerDefinitions = [
         name: 'Bounty Runes',
         group: 'object',
         style: styles.bountyRune,
+    },
+    {
+        id: 'dota_item_rune_spawner_xp',
+        name: 'Experience Runes',
+        group: 'object',
+        style: styles.xpRune,
     },
     {
         id: 'ent_dota_fountain',
@@ -150,6 +178,27 @@ const layerDefinitions = [
         name: 'Outpost',
         group: 'structure',
         style: styles.npc_dota_watch_tower,
+        toggle: true,
+    },
+    {
+        id: 'npc_dota_lantern',
+        name: 'Watcher',
+        group: 'structure',
+        style: styles.npc_dota_lantern,
+        toggle: true,
+    },
+    {
+        id: 'npc_dota_unit_twin_gate',
+        name: 'Twin Gate',
+        group: 'structure',
+        style: styles.npc_dota_unit_twin_gate,
+        toggle: true,
+    },
+    {
+        id: 'npc_dota_mango_tree',
+        name: 'Lotus Pool',
+        group: 'structure',
+        style: styles.npc_dota_mango_tree,
         toggle: true,
     },
 ];
