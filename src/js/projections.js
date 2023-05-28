@@ -11,7 +11,8 @@ const pixelProj = new Projection({
 
 const dotaProj = new Projection({
     code: 'dota',
-    extent: [-8288, -8288, 8288, 8288],
+    // extent: [-8288, -8288, 8288, 8288], pre-7.33
+    extent: [-10432, -10432, 10432, 10432],
     units: 'units',
 });
 

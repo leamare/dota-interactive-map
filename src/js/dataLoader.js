@@ -61,9 +61,9 @@ const loadPolygon = (map, layerDef, data, layer) => {
 };
 
 const loadJSON = (map, layerDef, data, layer) => {
-    const features = data.data[layerDef.id].map((point) => {
+    const features = Array.isArray(data.data[layerDef.id]) ? data.data[layerDef.id].map((point) => {
         const unitClass = point.subType ? `${layerDef.id}_${point.subType}` : layerDef.id;
-        const stats = data.stats[unitClass];
+        const stats = (data.stats || {})[unitClass] || null;
         
         const bounds = layerDef.id == 'ent_dota_tree' ? [64, 64] : (stats ? stats.bounds : data.data[unitClass][0].bounds);
         const geom = (bounds && bounds[0] > 0 && bounds[1] > 0)
@@ -83,7 +83,7 @@ const loadJSON = (map, layerDef, data, layer) => {
         feature.set('dotaProps', point, true);
 
         return feature;
-    });
+    }) : {};
 
     const vectorSource = new SourceVector({ features });
 

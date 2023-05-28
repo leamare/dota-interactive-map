@@ -1,5 +1,5 @@
 import VisionSimulation from 'dota-vision-simulation';
-import worlddata from 'dota-vision-simulation/src/worlddata.json';
+import worlddata from './worlddata';
 import union from '@turf/union';
 import { worldToLatLon } from './conversion';
 import fs from 'fs';
