@@ -64,6 +64,7 @@ class MenuPanel {
             optionId = `${layerDef.group}-${layerDef.id}`;
             menuItemCb.setAttribute('name', inputName);
             menuItemCb.setAttribute('value', optionId);
+            menuItemCb.setAttribute('data-layer-group', layerDef.group);
         }
         menuItemCb.id = `option-${optionId}`;
         menuItemCb.setAttribute('data-layer-id', optionId);
@@ -143,7 +144,9 @@ class MenuControl {
 
         const baseLayerToggleHandler = (e) => {
             const layerId = e.currentTarget.getAttribute('data-layer-id');
-            this.InteractiveMap.baseLayers.forEach(layer => layer.setVisible(layer.get('layerId') === layerId));
+            this.InteractiveMap.baseLayers.forEach(layer => {
+                layer.setVisible(layer.get('layerId') === layerId)
+            });
             setQueryString('BaseLayer', layerId);
         };
 

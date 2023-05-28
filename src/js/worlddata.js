@@ -1,0 +1,1 @@
+export default {"worldMaxY":10400,"worldMinX":-10464,"worldMinY":-10464,"worldMaxX":10400}
