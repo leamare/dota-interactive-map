@@ -1,5 +1,5 @@
 import VisionSimulation from 'dota-vision-simulation';
-import worlddata from 'dota-vision-simulation/src/worlddata.json';
+import worlddata from './worlddata';
 import View from 'ol/View';
 import Map from 'ol/Map';
 import { getCenter, containsXY } from 'ol/extent';
@@ -48,7 +48,8 @@ class InteractiveMap {
         this.options = {
             mode: 'navigate',
             zoom: 1,
-            resolutions: [32, 16, 8, 4, 2, 1],
+            // resolutions: [32, 16, 8, 4, 2, 1],
+            resolutions: [64, 32, 16, 8, 4, 2, 1, 0.5],
             isNight: false,
             isDarkness: false,
             ...options,
@@ -58,7 +59,7 @@ class InteractiveMap {
             },
         };
         this.mapTilePath = mapTilePath;
-        console.log(this, this.mapTilePath);
+        // console.log(this, this.mapTilePath);
         this.visionDataImagePath = visionDataImagePath;
         this.vs = new VisionSimulation(worlddata);
         this.mode = this.options.mode;
@@ -152,6 +153,7 @@ class InteractiveMap {
                 visible: !!layerDef.visible,
             });
             layer.set('layerId', `${layerDef.group}-${layerDef.id}`, true);
+            layer.set('layerGroup', layerDef.group, true);
             layer.set('layerDef', layerDef, true);
             return layer;
         })), []);
