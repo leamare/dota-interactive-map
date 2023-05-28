@@ -14,6 +14,33 @@ const defaultStyle = new Style({
     }),
 });
 
+const combinedScaledStyle = (icon, resolution) => {
+    return [
+        defaultStyle,
+        new Style({
+            image: new Icon({
+                src: icon,
+                anchor: [0.5, 0.5],
+                imgSize: [21, 21],
+                scale: Math.sqrt(24/resolution)
+            }),
+            geometry: getFeatureCenter,
+        }),
+    ];
+};
+
+const powerRuneTypes = [
+    'arcane',
+    'doubledamage',
+    'haste',
+    'illusion',
+    'invis',
+    'shield',
+    'water',
+];
+
+const getRandomPowerRune = () => powerRuneTypes[ Math.floor(Math.random() * powerRuneTypes.length) ];
+
 const styles = {
     creepSpawn: new Style({
         image: new RegularShape({
@@ -156,94 +183,62 @@ const styles = {
             width: 2,
         }),
     }),
-    ent_dota_fountain: [
+    ent_dota_fountain: (feature, resolution) => [
         defaultStyle,
         new Style({
             image: new Icon({
-                src: 'img/svgs/water-15.svg',
+                src: 'img/svgs/water-15.svg', // TODO: rework
                 anchor: [0.5, 0.5],
                 imgSize: [21, 21],
+                scale: 8/resolution
             }),
             geometry: getFeatureCenter,
-        }),
+        })
     ],
-    npc_dota_barracks: [
-        defaultStyle,
-        new Style({
-            image: new Icon({
-                src: 'img/svgs/stadium-15.svg',
-                anchor: [0.5, 0.5],
-                imgSize: [21, 21],
-            }),
-            geometry: getFeatureCenter,
-        }),
-    ],
-    npc_dota_filler: [
-        defaultStyle,
-        new Style({
-            image: new Icon({
-                src: 'img/svgs/landmark-15.svg',
-                anchor: [0.5, 0.5],
-                imgSize: [21, 21],
-            }),
-            geometry: getFeatureCenter,
-        }),
-    ],
-    npc_dota_tower: [
-        defaultStyle,
-        new Style({
-            image: new Icon({
-                src: 'img/svgs/castle-15.svg',
-                anchor: [0.5, 0.5],
-                imgSize: [21, 21],
-            }),
-            geometry: getFeatureCenter,
-        }),
-    ],
-    ent_dota_shop: [
-        defaultStyle,
-        new Style({
-            image: new Icon({
-                src: 'img/svgs/shop-15.svg',
-                anchor: [0.5, 0.5],
-                imgSize: [21, 21],
-            }),
-            geometry: getFeatureCenter,
-        }),
-    ],
-    npc_dota_fort: [
-        defaultStyle,
-        new Style({
-            image: new Icon({
-                src: 'img/svgs/town-hall-15.svg',
-                anchor: [0.5, 0.5],
-                imgSize: [21, 21],
-            }),
-            geometry: getFeatureCenter,
-        }),
-    ],
-    npc_dota_healer: [
-        defaultStyle,
-        new Style({
-            image: new Icon({
-                src: 'img/svgs/place-of-worship-15.svg',
-                anchor: [0.5, 0.5],
-                imgSize: [21, 21],
-            }),
-            geometry: getFeatureCenter,
-        }),
-    ],
-    npc_dota_watch_tower: [
-        defaultStyle,
-        new Style({
-            image: new Icon({
-                src: 'img/svgs/lighthouse-15.svg',
-                anchor: [0.5, 0.5],
-                imgSize: [21, 21],
-            }),
-            geometry: getFeatureCenter,
-        }),
-    ],
+    npc_dota_barracks: (feature, resolution) => combinedScaledStyle(
+        'img/svgs/dota_barracks.svg',
+        resolution
+    ),
+    npc_dota_filler: (feature, resolution) => combinedScaledStyle(
+        'img/svgs/landmark-15.svg', // TODO: rework
+        resolution
+    ),
+    npc_dota_tower: (feature, resolution) => combinedScaledStyle(
+        'img/svgs/dota_tower.svg',
+        resolution
+    ),
+    ent_dota_shop: (feature, resolution) => combinedScaledStyle(
+        'img/svgs/shop-15.svg', // TODO: rework
+        resolution
+    ),
+    npc_dota_fort: (feature, resolution) => combinedScaledStyle(
+        'img/svgs/town-hall-15.svg', // TODO: rework
+        resolution
+    ),
+    npc_dota_healer: (feature, resolution) => combinedScaledStyle(
+        'img/svgs/place-of-worship-15.svg', // TODO: rework
+        resolution
+    ),
+    npc_dota_watch_tower: (feature, resolution) => combinedScaledStyle(
+        'img/svgs/dota_outpost.svg',
+        resolution
+    ),
+    npc_dota_lantern: (feature, resolution) => combinedScaledStyle(
+        'img/svgs/dota_lantern.svg',
+        resolution
+    ),
+    npc_dota_unit_twin_gate: (feature, resolution) => combinedScaledStyle(
+        'img/svgs/dota_twin_gate.svg',
+        resolution
+    ),
+    npc_dota_mango_tree: (feature, resolution) => combinedScaledStyle(
+        'img/svgs/dota_lotus_pool.svg',
+        resolution
+    ),
+    landmarks: (feature, resolution) => combinedScaledStyle(
+        'img/svgs/pin.svg',
+        resolution
+    ),
     measure: new Style({
         fill: new Fill({ color: 'rgba(255, 255, 255, 0.3)' }),
         stroke: new Stroke({
@@ -316,19 +311,31 @@ const styles = {
     },
     bountyRune: new Style({
         image: new Icon({
-            src: 'img/bountyrune.png',
+            src: 'img/runes/bountyrune.png',
+            anchor: [0.5, 0.5],
+        }),
+    }),
+    xpRune: new Style({
+        image: new Icon({
+            src: 'img/runes/xprune.png',
             anchor: [0.5, 0.5],
         }),
     }),
     rune: new Style({
         image: new Icon({
-            src: 'img/doubledamage.png',
+            src: `img/runes/${getRandomPowerRune()}.png`,
             anchor: [0.5, 0.5],
         }),
     }),
     roshan: new Style({
         image: new Icon({
             src: 'img/roshan.png',
+            anchor: [0.5, 0.5],
+        }),
+    }),
+    sentinel: new Style({
+        image: new Icon({
+            src: 'img/sentinel.png',
             anchor: [0.5, 0.5],
         }),
     }),
@@ -434,7 +441,8 @@ const elevationColors = {
     //255: [],
 }
 styles.elevation = (feature, resolution) => {
-    const elevation = parseInt(feature.getProperties().elevation);
+    let elevation = parseInt(feature.getProperties().elevation);
+    if (elevation == NaN) elevation = 0;
     console.log('elevation', elevation);
     elevationStyles[elevation] = elevationStyles[elevation] || new Style({
         fill: new Fill({ color: elevationColors[elevation].concat([0.4]) }),
