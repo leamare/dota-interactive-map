@@ -67,6 +67,15 @@ const layerDefinitions = [
         }),
     },
     {
+        id: 'map_zones',
+        name: 'Map Zones',
+        filename: 'map_zones.json',
+        type: 'GeoJSON',
+        group: 'overlay',
+        projection: dotaProj,
+        style: styles.mapZones,
+    },
+    {
         id: 'npc_dota_neutral_spawner',
         name: 'Neutral Camps',
         group: 'object',

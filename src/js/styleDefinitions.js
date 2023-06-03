@@ -440,16 +440,64 @@ const elevationColors = {
     //240: [],
     //255: [],
 }
+
+const mapzoneColors = {
+    unknown: [0, 0, 0],
+    // base
+    radiant_base: [0, 255, 0],
+    dire_base: [255, 0, 0],
+    // lanes dire
+    dire_top: [255, 0, 128],
+    dire_mid: [200, 0, 192],
+    dire_bottom: [128, 0, 255],
+    // lanes radiant
+    radiant_top: [0, 255, 128],
+    radiant_mid: [0, 200, 192],
+    radiant_bottom: [0, 128, 255],
+    // tormentors
+    radiant_sentinel: [0, 255, 255],
+    dire_sentinel: [255, 0, 255],
+    // aura jungle
+    radiant_aura_jungle: [60, 200, 60],
+    dire_aura_jungle: [200, 60, 60],
+    // jungle
+    radiant_bottom_jungle: [192, 255, 192],
+    dire_top_jungle: [255, 192, 192],
+    radiant_top_jungle: [128, 255, 128],
+    dire_bottom_jungle: [255, 128, 128],
+    // roshpit
+    dire_roshpit: [255, 128, 255],
+    radiant_roshpit: [128, 255, 255],
+    // river
+    top_river: [60, 60, 60],
+    bottom_river: [128, 128, 128],
+    // laning
+    top_laning: [0, 0, 128],
+    middle_laning: [0, 0, 192],
+    bottom_laning: [0, 0, 255],
+}
+
+const mapzoneStyles = {};
+
 styles.elevation = (feature, resolution) => {
     let elevation = parseInt(feature.getProperties().elevation);
     if (elevation == NaN) elevation = 0;
-    console.log('elevation', elevation);
     elevationStyles[elevation] = elevationStyles[elevation] || new Style({
         fill: new Fill({ color: elevationColors[elevation].concat([0.4]) }),
         stroke: new Stroke({ color: elevationColors[elevation].concat([0.8]) }),
     });
     return elevationStyles[elevation];
 };
+
+styles.mapZones = (feature, resolution) => {
+    let zoneName = feature.getProperties().name;
+    if (!zoneName) zoneName = 'unknown';
+    mapzoneStyles[zoneName] = mapzoneStyles[zoneName] || new Style({
+        fill: new Fill({ color: mapzoneColors[zoneName].concat([0.4]) }),
+        stroke: new Stroke({ color: mapzoneColors[zoneName].concat([0.8]) }),
+    });
+    return mapzoneStyles[zoneName];
+}
 
 styles.teamColor = (feature, resolution) => {
     if (feature.getId().indexOf('_bad_') == -1) {
