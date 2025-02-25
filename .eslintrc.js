@@ -23,5 +23,6 @@ module.exports = {
         "class-methods-use-this": ["error", { "exceptMethods": ["onMsg"] }],
         "no-unused-vars": ["error", { "varsIgnorePattern": "logger" }],
         "no-fallthrough": ["error", { "commentPattern": "falls[\\s\\w]*through" }],
+        "no-prototype-builtins": ["off"],
     }
 };

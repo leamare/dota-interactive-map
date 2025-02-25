@@ -22,16 +22,18 @@ const unitNames = {
     npc_dota_neutral_spawner: 'Neutral Camp',
     observer: 'Observer Ward',
     sentry: 'Sentry Ward',
-    landmark_aura: "Landmark with Aura",
-    landmarks: "Landmark"
+    landmark_aura: 'Landmark with Aura',
+    landmarks: 'Landmark',
+    riverflow: 'River Flow',
+    wisdom_shrine: 'Shrine of Wisdom',
 };
 
 const landmarkNames = {
-    well: "Well of Wishes",
-    mines: "Mines",
-    graveyard: "Graveyard",
-    statue: "Dark Statue",
-}
+    well: 'Well of Wishes',
+    mines: 'Mines',
+    graveyard: 'Graveyard',
+    statue: 'Dark Statue',
+};
 
 const getUnitName = (unitType, unitSubType) => (unitSubType
     ? `${capitalize(unitSubType.replace('tower', 'Tier ').replace('range', 'Ranged'))} `
@@ -78,7 +80,7 @@ const getPopupContent = (stats, feature) => {
             htmlContent += `<br><span class="info-line">Vision: ${unitStats.dayVision}/${unitStats.nightVision}</span>`;
         }
     }
-    if (unitClass == 'landmarks') {
+    if (unitClass === 'landmarks') {
         htmlContent += `<br><span class="info-line">${landmarkNames[dotaProps.name]}</span>`;
     }
     htmlContent += '</span></div>';
