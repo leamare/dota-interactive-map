@@ -14,14 +14,14 @@ const defaultStyle = new Style({
     }),
 });
 
-const combinedScaledStyle = (icon, resolution) => {
+const combinedScaledStyle = (icon, resolution, size = 21) => {
     return [
         defaultStyle,
         new Style({
             image: new Icon({
                 src: icon,
                 anchor: [0.5, 0.5],
-                imgSize: [21, 21],
+                imgSize: [size, size],
                 scale: Math.sqrt(24/resolution)
             }),
             geometry: getFeatureCenter,
@@ -239,6 +239,17 @@ const styles = {
         'img/svgs/pin.svg',
         resolution
     ),
+    npc_dota_xp_fountain: [
+        defaultStyle,
+        new Style({
+            image: new Icon({
+                src: 'img/runes/xprune.png',
+                anchor: [0.5, 0.5],
+                imgSize: [33, 33],
+            }),
+            geometry: getFeatureCenter,
+        }),
+    ],
     measure: new Style({
         fill: new Fill({ color: 'rgba(255, 255, 255, 0.3)' }),
         stroke: new Stroke({
@@ -312,12 +323,6 @@ const styles = {
     bountyRune: new Style({
         image: new Icon({
             src: 'img/runes/bountyrune.png',
-            anchor: [0.5, 0.5],
-        }),
-    }),
-    xpRune: new Style({
-        image: new Icon({
-            src: 'img/runes/xprune.png',
             anchor: [0.5, 0.5],
         }),
     }),

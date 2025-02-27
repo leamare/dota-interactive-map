@@ -129,12 +129,6 @@ const layerDefinitions = [
         style: styles.bountyRune,
     },
     {
-        id: 'dota_item_rune_spawner_xp',
-        name: 'Experience Runes',
-        group: 'object',
-        style: styles.xpRune,
-    },
-    {
         id: 'ent_dota_fountain',
         name: 'Fountain',
         group: 'structure',
@@ -204,10 +198,23 @@ const layerDefinitions = [
         toggle: true,
     },
     {
-        id: 'npc_dota_mango_tree',
+        id: 'npc_dota_lotus_pool',
+        fallbacks: [
+            'npc_dota_mango_tree',
+        ],
         name: 'Lotus Pool',
         group: 'structure',
         style: styles.npc_dota_mango_tree,
+        toggle: true,
+    },
+    {
+        id: 'npc_dota_xp_fountain',
+        fallbacks: [
+            'dota_item_rune_spawner_xp',
+        ],
+        name: 'Shrine of Wisdom',
+        group: 'structure',
+        style: styles.npc_dota_xp_fountain,
         toggle: true,
     },
 ];

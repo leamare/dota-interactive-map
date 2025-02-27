@@ -25,7 +25,8 @@ const unitNames = {
     landmark_aura: 'Landmark with Aura',
     landmarks: 'Landmark',
     riverflow: 'River Flow',
-    wisdom_shrine: 'Shrine of Wisdom',
+    npc_dota_xp_fountain: 'Shrine of Wisdom',
+    npc_dota_lotus_pool: 'Lotus Pool',
 };
 
 const landmarkNames = {

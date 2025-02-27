@@ -9,7 +9,7 @@ import LayerGroup from 'ol/layer/Group';
 import Collection from 'ol/Collection';
 import { dotaProj, pixelProj } from './projections';
 
-const loadGeoJSON = (map, layerDef, data, version) => {
+const loadGeoJSON = (map, layerDef, data, version, id) => {
     try {
         const source = new SourceVector({
             url: `data/${version}/${layerDef.filename}`,
@@ -28,14 +28,14 @@ const loadGeoJSON = (map, layerDef, data, version) => {
     }
 };
 
-const loadPolygon = (map, layerDef, data, layer) => {
-    const features = data.data[layerDef.id].map((obj) => {
+const loadPolygon = (map, layerDef, data, layer, id) => {
+    const features = data.data[id].map((obj) => {
         const points = obj.points;
         const ring = points.map(point => transform([point.x, point.y], dotaProj, pixelProj));
         ring.push(transform([points[0].x, points[0].y], dotaProj, pixelProj));
         const geom = new Polygon([ring]);
         const feature = new Feature(geom);
-        obj.id = layerDef.id;
+        obj.id = id;
         feature.set('dotaProps', obj, true);
         return feature;
     });
@@ -60,9 +60,13 @@ const loadPolygon = (map, layerDef, data, layer) => {
     return layer;
 };
 
-const loadJSON = (map, layerDef, data, layer) => {
-    const features = Array.isArray(data.data[layerDef.id]) ? data.data[layerDef.id].map((point) => {
-        const unitClass = point.subType ? `${layerDef.id}_${point.subType}` : layerDef.id;
+const loadJSON = (map, layerDef, data, layer, id) => {
+    if (layerDef.id == 'npc_dota_xp_fountain') {
+        console.log(data.data[id]);
+    }
+
+    const features = Array.isArray(data.data[id]) ? data.data[id].map((point) => {
+        const unitClass = point.subType ? `${id}_${point.subType}` : id;
         const stats = (data.stats || {})[unitClass] || null;
         
         const bounds = layerDef.id == 'ent_dota_tree' ? [64, 64] : (stats ? stats.bounds : data.data[unitClass][0].bounds);
@@ -81,6 +85,10 @@ const loadJSON = (map, layerDef, data, layer) => {
         point.id = layerDef.id;
         point.unitClass = unitClass;
         feature.set('dotaProps', point, true);
+
+        if (layerDef.id == 'npc_dota_xp_fountain') {
+            console.log(point);
+        }
 
         return feature;
     }) : {};
@@ -109,24 +117,38 @@ const loadLayerGroupFromData = (InteractiveMap, data, version, layersIndex, laye
     const layers = [];
     for (let i = 0; i < layerDefs.length; i++) {
         const layerDef = layerDefs[i];
-        if (!data.data[layerDef.id] && ((layerDef.type !== 'pullRange' && layerDef.type !== 'GeoJSON') || version == '688')) continue;
+
+        let id = layerDef.id;
+        if ((!data.data[id] || !data.data[id].length) && layerDef.fallbacks) {
+            console.log(id, 'not found, checking fallbacks');
+            for (const fallbackId of layerDef.fallbacks) {
+                if (data.data[fallbackId] && data.data[fallbackId].length) {
+                    id = fallbackId;
+                    break;
+                }
+            }
+        }
+
+        if (!data.data[id] && ((layerDef.type !== 'pullRange' && layerDef.type !== 'GeoJSON') || version == '688')) continue;
         let layer;
         switch (layerDef.type) {
         case 'GeoJSON':
-            layer = loadGeoJSON(InteractiveMap.map, layerDef, layersIndex[layerDef.id], version);
+            layer = loadGeoJSON(InteractiveMap.map, layerDef, layersIndex[layerDef.id], version, id);
             break;
         case 'polygon':
-            layer = loadPolygon(InteractiveMap.map, layerDef, data, layersIndex[layerDef.id]);
+            layer = loadPolygon(InteractiveMap.map, layerDef, data, layersIndex[layerDef.id], id);
             break;
         default:
-            layer = loadJSON(InteractiveMap.map, layerDef, data, layersIndex[layerDef.id]);
+            layer = loadJSON(InteractiveMap.map, layerDef, data, layersIndex[layerDef.id], id);
             break;
         }
+
         if (layer) {
             layersIndex[layerDef.id] = layer;
             layers.push(layer);
         }
     }
+
     return new LayerGroup({
         title: 'Layers',
         layers: new Collection(layers),
