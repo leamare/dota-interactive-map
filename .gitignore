@@ -7,3 +7,4 @@ src/template/*.html
 scripts/generateGeoJson.js
 assets/tiles/
 baseLayerDefinitions.js
+.vscode/
