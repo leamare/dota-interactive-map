@@ -61,10 +61,6 @@ const loadPolygon = (map, layerDef, data, layer, id) => {
 };
 
 const loadJSON = (map, layerDef, data, layer, id) => {
-    if (layerDef.id == 'npc_dota_xp_fountain') {
-        console.log(data.data[id]);
-    }
-
     const features = Array.isArray(data.data[id]) ? data.data[id].map((point) => {
         const unitClass = point.subType ? `${id}_${point.subType}` : id;
         const stats = (data.stats || {})[unitClass] || null;
@@ -85,10 +81,6 @@ const loadJSON = (map, layerDef, data, layer, id) => {
         point.id = layerDef.id;
         point.unitClass = unitClass;
         feature.set('dotaProps', point, true);
-
-        if (layerDef.id == 'npc_dota_xp_fountain') {
-            console.log(point);
-        }
 
         return feature;
     }) : {};
@@ -120,7 +112,6 @@ const loadLayerGroupFromData = (InteractiveMap, data, version, layersIndex, laye
 
         let id = layerDef.id;
         if ((!data.data[id] || !data.data[id].length) && layerDef.fallbacks) {
-            console.log(id, 'not found, checking fallbacks');
             for (const fallbackId of layerDef.fallbacks) {
                 if (data.data[fallbackId] && data.data[fallbackId].length) {
                     id = fallbackId;
@@ -130,6 +121,8 @@ const loadLayerGroupFromData = (InteractiveMap, data, version, layersIndex, laye
         }
 
         if (!data.data[id] && ((layerDef.type !== 'pullRange' && layerDef.type !== 'GeoJSON') || version == '688')) continue;
+        if (layerDef.id == 'dota_movespeed_modifier_path' && (+version) < 738) continue;
+
         let layer;
         switch (layerDef.type) {
         case 'GeoJSON':

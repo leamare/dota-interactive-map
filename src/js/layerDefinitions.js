@@ -92,6 +92,15 @@ const layerDefinitions = [
         }),
     },
     {
+        id: 'dota_movespeed_modifier_path',
+        name: 'River Flow',
+        filename: 'riverflow.json',
+        type: 'GeoJSON',
+        group: 'overlay',
+        projection: dotaProj,
+        style: styles.riverFlow,
+    },
+    {
         id: 'ent_dota_tree',
         name: 'Trees',
         group: 'object',

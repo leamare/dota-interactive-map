@@ -344,6 +344,20 @@ const styles = {
             anchor: [0.5, 0.5],
         }),
     }),
+    riverFlowPath: new Style({
+        fill: new Fill({ color: 'rgba(255, 255, 255, 0.3)' }),
+        stroke: new Stroke({
+            color: 'rgba(255, 255, 255, 0.75)',
+            width: 2,
+        }),
+    }),
+    riverFlowPolygon: new Style({
+        fill: new Fill({ color: 'rgba(0, 127, 255, 0.25)' }),
+        stroke: new Stroke({
+            color: 'rgba(0, 127, 255, 0.75)',
+            width: 2,
+        }),
+    }),
 };
 
 const elevationStyles = {};
@@ -518,6 +532,14 @@ styles.creepColor = (feature, resolution) => {
     }
 
     return styles.direCreep;
+};
+
+styles.riverFlow = (feature, resolution) => {
+    if (feature.getProperties().name.indexOf('_polygon') !== -1) {
+        return styles.riverFlowPolygon;
+    }
+
+    return styles.riverFlowPath;
 };
 
 export default styles;
