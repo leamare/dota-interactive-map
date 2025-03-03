@@ -473,10 +473,15 @@ const mapzoneColors = {
     radiant_top: [0, 255, 128],
     radiant_mid: [0, 200, 192],
     radiant_bottom: [0, 128, 255],
-    // tormentors
+    // tormentors (legacy border jungle)
     radiant_sentinel: [0, 255, 255],
     dire_sentinel: [255, 0, 255],
-    // aura jungle
+    // border jungle
+    radiant_border_jungle_top: [0, 255, 255],
+    dire_border_jungle_bottom: [255, 0, 255],
+    radiant_border_jungle_bottom: [60, 200, 60],
+    dire_border_jungle_top: [200, 60, 60],
+    // aura jungle (legacy border jungle)
     radiant_aura_jungle: [60, 200, 60],
     dire_aura_jungle: [200, 60, 60],
     // jungle
@@ -484,9 +489,12 @@ const mapzoneColors = {
     dire_top_jungle: [255, 192, 192],
     radiant_top_jungle: [128, 255, 128],
     dire_bottom_jungle: [255, 128, 128],
-    // roshpit
+    // roshpit (legacy pre 7.38)
     dire_roshpit: [255, 128, 255],
     radiant_roshpit: [128, 255, 255],
+    // corners
+    dire_corner: [255, 128, 255],
+    radiant_corner: [128, 255, 255],
     // river
     top_river: [60, 60, 60],
     bottom_river: [128, 128, 128],
