@@ -121,7 +121,7 @@ const loadLayerGroupFromData = (InteractiveMap, data, version, layersIndex, laye
         }
 
         if (!data.data[id] && ((layerDef.type !== 'pullRange' && layerDef.type !== 'GeoJSON') || version == '688')) continue;
-        if (layerDef.id == 'dota_movespeed_modifier_path' && (+version) < 738) continue;
+        if (layerDef.id == 'dota_movespeed_modifier_path' && (+version.substring(0, 3)) < 738) continue;
 
         let layer;
         switch (layerDef.type) {
