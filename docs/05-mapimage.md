@@ -36,6 +36,11 @@ To get the images necessary to form the dota map image, the movie is exported as
 
 The most convenient way to stitch them together is using Microsoft's Image Compositor Editor v2, specifying "Planar Motion" option and setting Horizontal overlap to 10%.
 
+For 7.33+ maps I'd recommend the following settings:
+- Horizontal: 13.9
+- Vertical: 15
+- Search Radius: 0
+
 ## Mapping Image Coordinates to In-game Coordinates
 
 Now that I have a dota map image, the next step to using it in my interactive map is to figure out how the pixel coordinates map to in-game coordinates.
