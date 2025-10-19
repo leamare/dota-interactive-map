@@ -1,6 +1,6 @@
 {
   "name": "dota-interactive-map",
-  "version": "5.3.3",
+  "version": "5.4.0",
   "description": "Interactive Dota 2 Map",
   "main": "src/js/index.js",
   "private": true,
@@ -25,18 +25,18 @@
     "rollbar": "npm run rollbar:sourcemap && npm run rollbar:deploy -- production",
     "deploy": "node scripts/deploy.js && npm run rollbar",
     "gh-pages": "git subtree push --prefix build origin gh-pages",
-    "serve": "npx http-server build -p 3000"
+    "serve": "npx http-server build -p 3003"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/devilesk/dota-interactive-map.git"
+    "url": "git+https://github.com/leamare/dota-interactive-map.git"
   },
   "author": "devilesk",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/devilesk/dota-interactive-map/issues"
+    "url": "https://github.com/leamare/dota-interactive-map/issues"
   },
-  "homepage": "https://github.com/devilesk/dota-interactive-map#readme",
+  "homepage": "https://github.com/leamare/dota-interactive-map#readme",
   "devDependencies": {
     "@babel/core": "^7.4.4",
     "@turf/union": "^5.1.5",
