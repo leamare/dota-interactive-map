@@ -1,3 +1,5 @@
+@use 'variables' as *;
+
 .btn-playback {
     border: 1px solid $text-color;
     cursor: pointer;

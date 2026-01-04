@@ -1,3 +1,6 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
 @mixin message() {
     z-index: 100;
     position: absolute;

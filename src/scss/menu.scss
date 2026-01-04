@@ -1,3 +1,7 @@
+@use 'sass:color';
+@use 'variables' as *;
+@use 'mixins' as *;
+
 .menu-panel {
     height: 100%;
     width: $menu-width;
@@ -87,7 +91,7 @@
         
         &.small-font {
             font-size: 18px;
-            color: darken($text-color, 10%);
+            color: color.adjust($text-color, $lightness: -10%);
         }
     }
 

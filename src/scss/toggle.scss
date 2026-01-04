@@ -1,3 +1,6 @@
+@use 'sass:color';
+@use 'variables' as *;
+
 .btn-toggle {
     transition: 0.3s;
     height: 36px;
@@ -53,5 +56,5 @@ input[type="checkbox"]:checked + .checkbox + .btn-toggle {
 }
 
 .btn-toggle input[type="checkbox"]:checked + label::before {
-    background-color: darken($text-color, 25%);
+    background-color: color.adjust($text-color, $lightness: -25%);
 }
